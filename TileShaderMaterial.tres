@@ -1,0 +1,26 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=5]
+code = "shader_type spatial;
+
+uniform float mix_ratio : hint_range(0.0, 1.0);
+uniform vec4 target_color : hint_color;
+uniform vec4 base_color = vec4(1.0);
+
+void vertex() {
+	VERTEX.y += sin(5.0 * TIME) * 0.02 * mix_ratio;
+}
+
+
+void fragment() {
+
+		ALBEDO = mix(base_color.rgb, target_color.rgb, mix_ratio);		
+	
+}"
+
+[resource]
+resource_local_to_scene = true
+shader = SubResource( 5 )
+shader_param/mix_ratio = null
+shader_param/target_color = Color( 0.72549, 0, 0, 1 )
+shader_param/base_color = Plane( 1, 1, 1, 1 )
